@@ -1,10 +1,21 @@
 
-//DO NOT MODIFY THIS CODE
+/*
+Cory Witt
+script.js
+INFO 1579
+Shaw
+06/18/2025
+*/
+
+"Use Strict";
+
+//Calculate Tax 
 function calculateTax(subtotal, taxRate) {
     const tax = parseFloat(subtotal * taxRate);
     return tax.toFixed(2);
 }
 
+//print function
 function print(grossWages, federalTax, stateTax, ssTax, medicareTax, netWages) {
     const msg = `
                 Gross wages: $${grossWages.toFixed(2)}
@@ -20,45 +31,31 @@ function print(grossWages, federalTax, stateTax, ssTax, medicareTax, netWages) {
     `;
     alert(msg);
 }
-//END DO NOT MODIFY THIS CODE
-//YOUR CODE GOES BELOW
 
-const $ = (selector) => document.querySelector(selector);
-  // Function body
-  // ...
-  return /*return value*/;
-};
+const $ = selector => document.querySelector(selector);
 
+ document.addEventListener("DOMContentLoaded", () => {
+    $("#calculateTaxes").addEventListener("click", () => {
 
-taxButton.addEventListener('click', function() { // Add a click event listener
-  // Code to execute when the element is clicked
-  console.log('Calculate Taxes clicked!');
-});
+  let federalTax = 0;               //this will hold the calculated federal tax
+  let stateTax = 0;                 //this will hold the calculated state tax
+  let socialSecurityTax = 0;        //this will hold the calculated social security tax
+  let medicareTax = 0;              //this will hold the medicare tax
+  let netWages = 0;                 //this will hold the net wages
 
+  // Get monthlySalary Text Value 
+  const monthlySalary = parseFloat($("#monthlySalary").value);
 
-calcualateTaxes.addEventListener('click', function() { // Add a click event listener
-  // Code to execute when the element is clicked.
-// Get monthlySalary Text Value 
+  federalTax = monthlySalary * .12;
+  stateTax = monthlySalary * .05;
+  socialSecurityTax = monthlySalary * .06;
+  medicareTax = medicareTax * .015;
+  netWages = monthlySalary - federalTax - stateTax - socialSecurityTax - medicareTax;
+   
 // Calculate Federal, State Taxes, Social Security Taxes, Medicare Taxes 
-// Call print function 
-
+  print.call(this,monthlySalary,federalTax,stateTax,socialSecurityTax,medicareTax,netWages);
 
   console.log('Calculate Taxes clicked!');
-});
-
-//document.addEventListener('DOMContentLoaded', function() {
-  // Your code to execute once the DOM is ready goes here
-//  console.log('The DOM has been fully loaded and parsed.');
-  // You can now safely access and manipulate elements within the HTML document.//
-});
-
-
-/*  Terminology
-    --------------
-    Here are some terms, in case you don't understand gross/net wages.
-
-    Gross wages is your full pay, before deductions.
-
-    Net wages is what you actually receive, once taxes, insurance, retirement, etc. have been deducted.
-*/
-
+     });
+});     
+ 
