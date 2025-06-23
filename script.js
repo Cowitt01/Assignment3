@@ -1,21 +1,24 @@
-
 /*
 Cory Witt
 script.js
 INFO 1579
 Shaw
-06/18/2025
+06/22/2025
 */
+
+//This program will take a monthly salary, calculate the appropriate deductions and net income,
+//and display the information to the screen.
 
 "Use Strict";
 
-//Calculate Tax 
+//This function will take in a subtotal and tax rate, and calculate \ return the deduction value.
 function calculateTax(subtotal, taxRate) {
     const tax = parseFloat(subtotal * taxRate);
     return tax.toFixed(2);
 }
 
-//print function
+//This function will take in the gross wages, federal tax, state tax, social security tax,
+//Medicare tax, and net wages and print to the screen.
 function print(grossWages, federalTax, stateTax, ssTax, medicareTax, netWages) {
     const msg = `
                 Gross wages: $${grossWages.toFixed(2)}
@@ -32,28 +35,31 @@ function print(grossWages, federalTax, stateTax, ssTax, medicareTax, netWages) {
     alert(msg);
 }
 
-const $ = selector => document.querySelector(selector);
+const $ = selector => document.querySelector(selector);   //arrow document query selector 
 
- document.addEventListener("DOMContentLoaded", () => {
-    $("#calculateTaxes").addEventListener("click", () => {
+//Event Listener event for Calculate Taxes "click" and 
+//"DOMContentLoaded" (contains code that must wait to be executed
+//until the HTML is loaded.  
 
-  let federalTax = 0;               //this will hold the calculated federal tax
-  let stateTax = 0;                 //this will hold the calculated state tax
-  let socialSecurityTax = 0;        //this will hold the calculated social security tax
-  let medicareTax = 0;              //this will hold the medicare tax
-  let netWages = 0;                 //this will hold the net wages
+document.addEventListener("DOMContentLoaded", () => {
+    $("#calculateTaxes").addEventListener("click", () => { 
 
-  // Get monthlySalary Text Value 
+  //Get monthlySalary Text Value. Calls $ Arrow function for "#monthlySalary" QuerySelector
   const monthlySalary = parseFloat($("#monthlySalary").value);
 
-  federalTax = monthlySalary * .12;
-  stateTax = monthlySalary * .05;
-  socialSecurityTax = monthlySalary * .06;
-  medicareTax = medicareTax * .015;
-  netWages = monthlySalary - federalTax - stateTax - socialSecurityTax - medicareTax;
-   
-// Calculate Federal, State Taxes, Social Security Taxes, Medicare Taxes 
-  print.call(this,monthlySalary,federalTax,stateTax,socialSecurityTax,medicareTax,netWages);
+  //Calculate Federal Taxes, State Taxes, Social Security Taxes and Medicare Taxes 
+  //using calculateTax function
+
+  let federalTax = parseFloat(calculateTax(monthlySalary,.12));          //Federal Tax = 12%
+  let stateTax = parseFloat(calculateTax(monthlySalary,.05));            //State Tax = 5 %
+  let socialSecurityTax = parseFloat(calculateTax(monthlySalary,.06));   //Social Security Tax = 6%
+  let medicareTax = parseFloat(calculateTax(monthlySalary,.015));        //Medicare Tax = 1.5%
+
+  //Calculate Net Salary = Monthly Salary - Federal, State, Social Security, and Medicare Tax
+  let netSalary = monthlySalary- federalTax- stateTax-socialSecurityTax-medicareTax;
+  
+  // Call print function to display information to screen.
+  print(monthlySalary,federalTax,stateTax,socialSecurityTax,medicareTax,netSalary);
 
   console.log('Calculate Taxes clicked!');
      });
