@@ -3,7 +3,7 @@ Cory Witt
 script.js
 INFO 1579
 Shaw
-06/22/2025
+06/26/2025
 */
 
 //This program will take a monthly salary, calculate the appropriate deductions and net income,
